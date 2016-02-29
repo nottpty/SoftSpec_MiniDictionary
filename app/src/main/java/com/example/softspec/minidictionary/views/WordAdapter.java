@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.example.softspec.minidictionary.R;
 import com.example.softspec.minidictionary.models.Word;
@@ -28,11 +29,13 @@ public class WordAdapter extends ArrayAdapter<Word> {
             v = vi.inflate(R.layout.word_cell, null);
         }
 
-        Word word = getItem(position);
+        if(v != null){
+            TextView words = (TextView)v.findViewById(R.id.edtxt_title);
+            TextView meaning = (TextView)v.findViewById(R.id.edtxt_meaning);
 
-        if(word != null) {
-
-            // TODO: set text to each cell.
+            Word word = getItem(position);
+            words.setText(word.getWord().toString());
+            meaning.setText(word.getMeaning().toString());
         }
 
         return v;
