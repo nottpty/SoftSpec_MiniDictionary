@@ -1,6 +1,7 @@
 package com.example.softspec.minidictionary.views;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
             TextView words = (TextView)v.findViewById(R.id.tv_word);
 
             Word word = getItem(position);
+            words.setTextColor(Color.WHITE);
             words.setText(word.getTitle());
         }
 
