@@ -16,13 +16,13 @@ public class Word implements Serializable{
         this.meaning = meaning;
     }
 
-    public String getWord(){return word;}
+    public String getTitle(){return word;}
 
     public String getMeaning() {return meaning;}
 
     public static class AlphabetComparator implements Comparator<Word>{
         public int compare(Word word1,Word word2){
-            return word1.getWord().compareTo(word2.getWord());
+            return word1.getTitle().compareTo(word2.getTitle());
         }
     }
 

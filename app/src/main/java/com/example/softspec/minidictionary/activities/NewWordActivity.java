@@ -50,7 +50,7 @@ public class NewWordActivity extends AppCompatActivity {
 
     private void saveNewWord() {
         Storage.getInstance().saveWord(
-                new Word(word.getText().toString(),meaning.getText().toString())
+                new Word(word.getText().toString(), meaning.getText().toString())
         );
     }
 

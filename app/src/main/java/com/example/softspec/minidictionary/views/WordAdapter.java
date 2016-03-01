@@ -30,12 +30,10 @@ public class WordAdapter extends ArrayAdapter<Word> {
         }
 
         if(v != null){
-            TextView words = (TextView)v.findViewById(R.id.edtxt_title);
-            TextView meaning = (TextView)v.findViewById(R.id.edtxt_meaning);
+            TextView words = (TextView)v.findViewById(R.id.tv_word);
 
             Word word = getItem(position);
-            words.setText(word.getWord().toString());
-            meaning.setText(word.getMeaning().toString());
+            words.setText(word.getTitle());
         }
 
         return v;
