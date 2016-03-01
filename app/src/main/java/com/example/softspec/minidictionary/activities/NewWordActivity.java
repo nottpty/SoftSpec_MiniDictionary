@@ -1,5 +1,9 @@
 package com.example.softspec.minidictionary.activities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,8 +37,23 @@ public class NewWordActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveNewWord();
-                finish();
+                if (isNotWord(word.getText().toString())) {
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(NewWordActivity.this);
+                    dlgAlert.setMessage("Invalid word.");
+                    dlgAlert.setTitle("Error");
+                    dlgAlert.setPositiveButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //dismiss the dialog
+                                }
+                            });
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+                } else {
+                    saveNewWord();
+                    finish();
+                }
+
             }
         });
         // TODO: back to main activity (if user clicks "CANCEL").
@@ -54,4 +73,21 @@ public class NewWordActivity extends AppCompatActivity {
         );
     }
 
+    private boolean isSpecial(String word) {
+        char ch;
+        for(int i=0 ; i<word.length() ; i++) {
+            ch = word.charAt(i);
+            if(!(Character.isSpace(ch) || Character.isLetter(ch))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isNotWord(String word) {
+        if(word.equals("") || (word.startsWith(" ")) || isSpecial(word)) {
+            return true;
+        }
+        return false;
+    }
 }
