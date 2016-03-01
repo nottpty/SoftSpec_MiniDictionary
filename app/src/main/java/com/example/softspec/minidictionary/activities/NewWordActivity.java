@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.softspec.minidictionary.R;
 import com.example.softspec.minidictionary.models.Storage;
@@ -51,6 +52,7 @@ public class NewWordActivity extends AppCompatActivity {
                     dlgAlert.create().show();
                 } else {
                     saveNewWord();
+                    Toast.makeText(NewWordActivity.this, "Adding Successful", Toast.LENGTH_LONG).show();
                     finish();
                 }
 
@@ -61,7 +63,31 @@ public class NewWordActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(NewWordActivity.this);
+
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                        dialog.dismiss();
+                    }
+
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
 
