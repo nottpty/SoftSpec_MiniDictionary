@@ -58,7 +58,7 @@ public class WordActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_delete) {
+        if (id == R.id.btn_delete) {
             AlertDialog.Builder builder = new AlertDialog.Builder(WordActivity.this);
 
             builder.setTitle("Confirm");
@@ -94,7 +94,7 @@ public class WordActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.action_settings, menu);
+        inflater.inflate(R.menu.action_delete, menu);
         return true;
     }
 }
