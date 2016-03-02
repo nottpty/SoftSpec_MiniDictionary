@@ -1,13 +1,11 @@
 package com.example.softspec.minidictionary.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ListView;
 
 import com.example.softspec.minidictionary.R;
@@ -20,7 +18,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView wordGridView;
+    private ListView wordListView;
     private List<Word> words;
     private WordAdapter wordAdapter;
 
@@ -36,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private void initComponents() {
         words = new ArrayList<Word>();
         wordAdapter  = new WordAdapter(this, R.layout.word_cell,words);
-        wordGridView = (ListView)findViewById(R.id.list_view);
-        wordGridView.setAdapter(wordAdapter);
-        wordGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        wordListView = (ListView)findViewById(R.id.list_view);
+        wordListView.setAdapter(wordAdapter);
+        wordListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, WordActivity.class);

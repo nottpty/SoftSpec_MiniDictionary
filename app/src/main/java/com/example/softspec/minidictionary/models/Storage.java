@@ -1,5 +1,7 @@
 package com.example.softspec.minidictionary.models;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
