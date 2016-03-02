@@ -85,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+        if(id == R.id.btn_more) {
+            //TODO: clear all words in list.
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -92,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_add, menu);
+        inflater.inflate(R.menu.action_more, menu);
         return true;
     }
 
