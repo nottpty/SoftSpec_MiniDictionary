@@ -1,10 +1,14 @@
 package com.example.softspec.minidictionary.activities;
 
 import android.app.AlertDialog;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.softspec.minidictionary.R;
@@ -20,11 +25,13 @@ import com.example.softspec.minidictionary.models.Word;
 import com.example.softspec.minidictionary.views.WordAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView wordListView;
+    private SearchView searchView;
     private List<Word> words;
     private WordAdapter wordAdapter;
 
@@ -65,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         for(Word word: Storage.getInstance().loadWords()){
             words.add(word);
         }
+        Collections.sort(words, new Word.AlphabetComparator());
         wordAdapter.notifyDataSetChanged();
     }
 
@@ -95,9 +103,52 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_search, menu);
         inflater.inflate(R.menu.action_add, menu);
         inflater.inflate(R.menu.action_more, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) searchItem.getActionView();
+        setupSearchView(searchItem);
         return true;
     }
 
+    private void setupSearchView(MenuItem searchItem) {
+        searchView.setIconifiedByDefault(false);
+        searchView.setQueryHint("Search");
+        searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM
+                | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        if (searchManager != null) {
+            List<SearchableInfo> searchables = searchManager.getSearchablesInGlobalSearch();
+            SearchableInfo info = searchManager.getSearchableInfo(getComponentName());
+            for (SearchableInfo inf : searchables) {
+                if (inf.getSuggestAuthority() != null
+                        && inf.getSuggestAuthority().startsWith("applications")) {
+                    info = inf;
+                }
+            }
+            searchView.setSearchableInfo(info);
+        }
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                words.clear();
+                for (Word w : Storage.getInstance().loadWords()) {
+                    if (w.getTitle().toLowerCase().contains(newText.toLowerCase())) {
+                        words.add(w);
+                    }
+                }
+
+                wordAdapter.notifyDataSetChanged();
+                return true;
+            }
+        });
+    }
 }

@@ -22,7 +22,8 @@
         android:choiceMode="none"
 
         android:layout_alignParentStart="true"/>
-        <!--android:layout_above="@+id/btn_add" />-->
+
+    <!--android:layout_above="@+id/btn_add" />-->
 
     <!--<Button-->
         <!--android:layout_width="wrap_content"-->

@@ -6,7 +6,7 @@ import java.util.Comparator;
 /**
  * Created by Earth, Boss, Nott on 29/2/2559.
  */
-public class Word implements Serializable{
+public class Word implements Serializable {
 
     private String title;
     private String meaning;
