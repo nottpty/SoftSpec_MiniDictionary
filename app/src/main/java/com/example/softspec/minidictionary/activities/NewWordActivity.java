@@ -94,7 +94,7 @@ public class NewWordActivity extends AppCompatActivity {
     }
 
     private void saveNewWord() {
-        Storage.getInstance().saveWord(
+        Storage.getInstance().saveWord(this,
                 new Word(word.getText().toString(), meaning.getText().toString())
         );
     }

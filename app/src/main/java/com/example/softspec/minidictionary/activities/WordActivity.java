@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -67,9 +68,9 @@ public class WordActivity extends AppCompatActivity {
             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                 public void onClick(DialogInterface dialog, int which) {
-                    Storage.getInstance().deleteWords(word);
-                    Intent intent = new Intent(WordActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    Storage.getInstance().deleteWords(WordActivity.this, word);
+//                    Intent intent = new Intent(WordActivity.this, MainActivity.class);
+//                    startActivity(intent);
                     Toast.makeText(WordActivity.this, "Deleting Successful", Toast.LENGTH_LONG).show();
                     finish();
                 }

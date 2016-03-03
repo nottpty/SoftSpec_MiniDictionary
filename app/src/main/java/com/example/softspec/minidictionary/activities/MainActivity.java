@@ -6,6 +6,7 @@ import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     private SearchView searchView;
     private List<Word> words;
     private WordAdapter wordAdapter;
+    private SharedPreferences sp;
+    private boolean isFirstime = true;
+    private SharedPreferences.Editor editor;
 
 //    private Button addButton;
 
@@ -41,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sp = getSharedPreferences("WORDS", Context.MODE_PRIVATE);
+        editor = sp.edit();
         initComponents();
     }
 
@@ -69,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void refreshWords(){
         words.clear();
-        for(Word word: Storage.getInstance().loadWords()){
+        for(Word word: Storage.getInstance().loadWords(this)){
             words.add(word);
         }
         Collections.sort(words, new Word.AlphabetComparator());
@@ -78,8 +84,22 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onStart(){
         super.onStart();
+        if(isFirstime) {
+            getWordsFromStorage();
+            isFirstime = false;
+        }
         refreshWords();
     }
+
+    private void getWordsFromStorage() {
+        int size = sp.getInt("words_size", 0);
+        for(int i = 0; i < size; i++) {
+            String title = sp.getString("title_" + i, "");
+            String meaning = sp.getString("meaning_" + i, "");
+            Storage.getInstance().saveWord(this, new Word(title, meaning));
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -140,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 words.clear();
-                for (Word w : Storage.getInstance().loadWords()) {
+                for (Word w : Storage.getInstance().loadWords(MainActivity.this)) {
                     if (w.getTitle().toLowerCase().contains(newText.toLowerCase())) {
                         words.add(w);
                     }
