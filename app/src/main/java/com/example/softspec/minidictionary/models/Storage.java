@@ -26,6 +26,12 @@ public class Storage {
         savedWords = new ArrayList<Word>();
     }
 
+    public void clearStorage(){
+        editor.clear();
+        editor.commit();
+        instance = null;
+    }
+
     public static Storage getInstance() {
         if(instance == null){
             instance = new Storage();

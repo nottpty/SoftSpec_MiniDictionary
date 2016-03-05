@@ -8,7 +8,7 @@
         android:icon="@drawable/ic_more_horiz_white_24dp">
 
         <menu>
-            <item android:id="@+id/action_settings"
+            <item android:id="@+id/clear_all"
                 app:showAsAction="ifRoom"
                 android:title="Clear All" />
         </menu>

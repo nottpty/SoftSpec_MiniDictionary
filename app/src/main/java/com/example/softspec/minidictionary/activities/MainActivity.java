@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.UserDictionary;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -113,8 +114,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        if(id == R.id.btn_more) {
-            //TODO: clear all words in list.
+        if(id == R.id.clear_all) {
+            Storage.getInstance().clearStorage();
+            refreshWords();
         }
 
         return super.onOptionsItemSelected(item);
