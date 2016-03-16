@@ -20,6 +20,10 @@ public class Word implements Serializable {
         synonym = new ArrayList<Word>();
     }
 
+    public void setMeaning(String newMeaning) {
+        this.meaning = newMeaning;
+    }
+
     public String getTitle(){
         return title;
     }

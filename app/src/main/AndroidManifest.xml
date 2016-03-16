@@ -14,15 +14,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-
         </activity>
         <activity android:name=".activities.NewWordActivity" />
-        <activity android:name=".activities.WordActivity"></activity>
-
+        <activity android:name=".activities.WordActivity" />
+        <activity android:name=".activities.EditWordActivity"></activity>
     </application>
 
 </manifest>

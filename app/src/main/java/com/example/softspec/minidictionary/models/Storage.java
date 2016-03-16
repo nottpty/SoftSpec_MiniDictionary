@@ -26,10 +26,9 @@ public class Storage {
         savedWords = new ArrayList<Word>();
     }
 
-    public void clearStorage(){
-        editor.clear();
-        editor.commit();
-        instance = null;
+    public void clearStorage(Context context){
+        savedWords.clear();
+        saveStorage(context);
     }
 
     public static Storage getInstance() {
@@ -43,9 +42,26 @@ public class Storage {
         savedWords.add(word);
         saveStorage(context);
     }
+    public void editWord(Context context, Word word, String newMeaning) {
+        Word temp = getWordByTitle(word.getTitle());
+        temp.setMeaning(newMeaning);
+        saveStorage(context);
+    }
 
     public List<Word> loadWords(Context context) {
         return savedWords;
+    }
+
+    public Word getWordByTitle(String title) {
+        Word query = null;
+        for(Word w : savedWords) {
+            if(w.getTitle().equals(title)) {
+                query = w;
+                break;
+            }
+        }
+
+        return query;
     }
 
     public void clearWords(Context context) {

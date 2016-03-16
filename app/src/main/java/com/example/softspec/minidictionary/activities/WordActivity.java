@@ -24,16 +24,26 @@ public class WordActivity extends AppCompatActivity {
     private TextView title;
     private TextView meaning;
     private Word word;
+    private static boolean isFirstime = true;
+    private static String thisTitle = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        word = (Word)getIntent().getSerializableExtra("word");
         setContentView(R.layout.activity_word);
         initComponents();
     }
 
     private void initComponents() {
+        Log.e("TITLE", thisTitle);
+        if(isFirstime) {
+            word = (Word) getIntent().getSerializableExtra("word");
+            thisTitle = word.getTitle();
+            isFirstime = false;
+        }
+        else {
+            word = Storage.getInstance().getWordByTitle(thisTitle);
+        }
         title = (TextView)findViewById(R.id.tv_title);
         meaning = (TextView)findViewById(R.id.tv_meaning);
         backButton = (Button) findViewById(R.id.btn_back);
@@ -69,8 +79,8 @@ public class WordActivity extends AppCompatActivity {
 
                 public void onClick(DialogInterface dialog, int which) {
                     Storage.getInstance().deleteWords(WordActivity.this, word);
-//                    Intent intent = new Intent(WordActivity.this, MainActivity.class);
-//                    startActivity(intent);
+                    Intent intent = new Intent(WordActivity.this, MainActivity.class);
+                    startActivity(intent);
                     Toast.makeText(WordActivity.this, "Deleting Successful", Toast.LENGTH_LONG).show();
                     finish();
                 }
@@ -81,12 +91,22 @@ public class WordActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // Do nothing
+                    Intent intent = new Intent(WordActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                     dialog.dismiss();
                 }
             });
 
             AlertDialog alert = builder.create();
             alert.show();
+        }
+
+        else if(id == R.id.btn_edit) {
+            Intent intent = new Intent(WordActivity.this, EditWordActivity.class);
+            intent.putExtra("word", word);
+            startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -96,6 +116,7 @@ public class WordActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_delete, menu);
+        inflater.inflate(R.menu.action_edit, menu);
         return true;
     }
 }
