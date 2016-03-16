@@ -115,8 +115,8 @@ public class WordActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.action_delete, menu);
         inflater.inflate(R.menu.action_edit, menu);
+        inflater.inflate(R.menu.action_delete, menu);
         return true;
     }
 }
