@@ -10,21 +10,31 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.softspec.minidictionary.R;
 import com.example.softspec.minidictionary.models.Storage;
 import com.example.softspec.minidictionary.models.Word;
+import com.example.softspec.minidictionary.views.SynonymAdapter;
+import com.example.softspec.minidictionary.views.WordAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 public class WordActivity extends AppCompatActivity {
 
     private Button backButton;
+    private Button addSynButton;
     private TextView title;
     private TextView meaning;
+    private ListView synonymListView;
+    private List<String> listSyn;
+    private SynonymAdapter synonymAdapter;
     private Word word;
     private boolean isFirstime = true;
     private String thisTitle = "";
@@ -46,13 +56,34 @@ public class WordActivity extends AppCompatActivity {
         else {
             word = Storage.getInstance().getWordByTitle(thisTitle);
         }
+        listSyn = new ArrayList<String>();
+        synonymAdapter  = new SynonymAdapter(this, R.layout.synonym_cell,listSyn);
+        synonymListView = (ListView)findViewById(R.id.list_view_synonym);
+        synonymListView.setAdapter(synonymAdapter);
+        synonymListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(WordActivity.this, WordActivity.class);
+                intent.putExtra("word", listSyn.get(position));
+                startActivity(intent);
+            }
+        });
         title = (TextView)findViewById(R.id.tv_title);
         meaning = (TextView)findViewById(R.id.tv_meaning);
+        synonymListView = (ListView)findViewById(R.id.list_view_synonym);
         backButton = (Button) findViewById(R.id.btn_back);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        addSynButton = (Button) findViewById(R.id.btn_addSynonym);
+        addSynButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WordActivity.this, AddSynonymActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -61,6 +92,8 @@ public class WordActivity extends AppCompatActivity {
         super.onStart();
         title.setText(word.getTitle());
         meaning.setText(word.getMeaning());
+
+
     }
 
     @Override

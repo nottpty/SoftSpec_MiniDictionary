@@ -51,6 +51,14 @@ public class Storage extends Observable {
         saveStorage(context);
     }
 
+    public void addSynonym(Context context, Word word, Word synonym) {
+        Word temp = getWordByTitle(word.getTitle());
+        Word synWord = getWordByTitle(synonym.getTitle());
+        temp.addSynonym(synWord);
+        saveStorage(context);
+
+    }
+
     public List<Word> loadWords(Context context) {
         return savedWords;
     }
@@ -98,8 +106,14 @@ public class Storage extends Observable {
         editor = context.getSharedPreferences(DB, Context.MODE_PRIVATE).edit();
         editor.putInt("words_size", savedWords.size());
         for (int i = 0; i < savedWords.size(); i++) {
-            editor.putString("title_" + i, savedWords.get(i).getTitle());
-            editor.putString("meaning_" + i, savedWords.get(i).getMeaning());
+            Word word = savedWords.get(i);
+            editor.putString("title_" + i, word.getTitle());
+            editor.putString("meaning_" + i, word.getMeaning());
+            String text = "";
+            for(int j=0 ; j<word.getSynonym().size() ; j++) {
+                text += word.getSynonym().get(j).getTitle()+",";
+            }
+            editor.putString("synonym_" + i,text);
         }
         editor.commit();
     }

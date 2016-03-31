@@ -7,39 +7,25 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activities.NewWordActivity"
+    tools:context=".activities.AddSynonymActivity"
     android:background="#FF3D3D3D">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Title"
-        android:id="@+id/tv_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:textSize="38sp"
-        android:textColor="#ffffff"
-        android:autoText="false" />
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/edtxt_meaning"
-        android:layout_below="@+id/tv_title"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtxt_addSynonym"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="Type Meaning Here"
+        android:hint="Type Synonym Here"
         android:textColor="#ffffff"
-        android:textColorHint="#ffffff"
-        android:gravity="top" />
+        android:textColorHint="#ffffff" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit"
-        android:id="@+id/btn_edit"
+        android:text="Add"
+        android:id="@+id/btn_addSynonym"
         android:layout_alignTop="@+id/btn_cancel"
         android:layout_toLeftOf="@+id/btn_cancel"
         android:layout_toStartOf="@+id/btn_cancel" />
@@ -57,6 +43,7 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/edtxt_meaning"
         android:layout_centerHorizontal="true"
         android:id="@+id/linearLayout">
 
