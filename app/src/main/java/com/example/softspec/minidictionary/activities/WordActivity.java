@@ -18,14 +18,16 @@ import com.example.softspec.minidictionary.R;
 import com.example.softspec.minidictionary.models.Storage;
 import com.example.softspec.minidictionary.models.Word;
 
+import java.util.Observable;
+
 public class WordActivity extends AppCompatActivity {
 
     private Button backButton;
     private TextView title;
     private TextView meaning;
     private Word word;
-    private static boolean isFirstime = true;
-    private static String thisTitle = "";
+    private boolean isFirstime = true;
+    private String thisTitle = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class WordActivity extends AppCompatActivity {
     }
 
     private void initComponents() {
-        Log.e("TITLE", thisTitle);
+//        Log.e("TITLE", thisTitle);
         if(isFirstime) {
             word = (Word) getIntent().getSerializableExtra("word");
             thisTitle = word.getTitle();
@@ -79,8 +81,6 @@ public class WordActivity extends AppCompatActivity {
 
                 public void onClick(DialogInterface dialog, int which) {
                     Storage.getInstance().deleteWords(WordActivity.this, word);
-                    Intent intent = new Intent(WordActivity.this, MainActivity.class);
-                    startActivity(intent);
                     Toast.makeText(WordActivity.this, "Deleting Successful", Toast.LENGTH_LONG).show();
                     finish();
                 }
@@ -91,8 +91,6 @@ public class WordActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // Do nothing
-                    Intent intent = new Intent(WordActivity.this, MainActivity.class);
-                    startActivity(intent);
                     finish();
                     dialog.dismiss();
                 }

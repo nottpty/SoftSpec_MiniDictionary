@@ -10,11 +10,12 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * Created by Earth, Boss, Nott on 29/2/2559.
  */
-public class Storage {
+public class Storage extends Observable {
 
 
     private List<Word> savedWords;
@@ -29,6 +30,8 @@ public class Storage {
     public void clearStorage(Context context){
         savedWords.clear();
         saveStorage(context);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public static Storage getInstance() {
