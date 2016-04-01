@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean isFirstime = true;
     private SharedPreferences.Editor editor;
 
-//    private Button addButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,8 +84,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void onStart(){
+        Log.e("COMEBACK","eiei");
         super.onStart();
         if(isFirstime) {
+            Log.e("EIEIEISUNG","EIEIEISUGG");
             getWordsFromStorage();
             isFirstime = false;
         }
@@ -99,7 +99,25 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < size; i++) {
             String title = sp.getString("title_" + i, "");
             String meaning = sp.getString("meaning_" + i, "");
-            Storage.getInstance().saveWord(this, new Word(title, meaning));
+            Word word = new Word(title, meaning);
+            Storage.getInstance().saveWord(this,word);
+        }
+        for(int i = 0; i<size; i++) {
+            String title = sp.getString("title_" + i, "");
+            /*
+            Check word have syn or not
+            then get size
+            and get array mang ma (split gor dai)
+             */
+            for(int j=0 )
+                /*
+                won add sai word jon mod
+                 */
+            /**
+             * If tong nee sed law
+             * tum link pai another word duay na ja
+             * EIEI
+             */
         }
     }
 

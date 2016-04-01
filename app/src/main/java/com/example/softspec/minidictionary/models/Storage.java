@@ -43,20 +43,17 @@ public class Storage extends Observable {
 
     public void saveWord(Context context, Word word) {
         savedWords.add(word);
-        saveStorage(context);
     }
     public void editWord(Context context, Word word, String newMeaning) {
-        Word temp = getWordByTitle(word.getTitle());
-        temp.setMeaning(newMeaning);
+        savedWords.get(savedWords.indexOf(word)).setMeaning(newMeaning);
+        editor = context.getSharedPreferences(DB, Context.MODE_PRIVATE).edit();
         saveStorage(context);
     }
 
     public void addSynonym(Context context, Word word, Word synonym) {
-        Word temp = getWordByTitle(word.getTitle());
-        Word synWord = getWordByTitle(synonym.getTitle());
-        temp.addSynonym(synWord);
+        savedWords.get(savedWords.indexOf(word)).addSynonym(synonym);
+        editor = context.getSharedPreferences(DB, Context.MODE_PRIVATE).edit();
         saveStorage(context);
-
     }
 
     public List<Word> loadWords(Context context) {
@@ -105,16 +102,19 @@ public class Storage extends Observable {
     private void saveStorage(Context context) {
         editor = context.getSharedPreferences(DB, Context.MODE_PRIVATE).edit();
         editor.putInt("words_size", savedWords.size());
+        Log.e("size1", savedWords.size() + "");
         for (int i = 0; i < savedWords.size(); i++) {
             Word word = savedWords.get(i);
             editor.putString("title_" + i, word.getTitle());
             editor.putString("meaning_" + i, word.getMeaning());
             String text = "";
+            Log.e("size2",savedWords.size()+"");
             for(int j=0 ; j<word.getSynonym().size() ; j++) {
                 text += word.getSynonym().get(j).getTitle()+",";
             }
             editor.putString("synonym_" + i,text);
         }
         editor.commit();
+
     }
 }

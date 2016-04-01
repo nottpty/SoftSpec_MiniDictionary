@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".activities.NewWordActivity" />
         <activity android:name=".activities.WordActivity" />
+        <activity android:name=".activities.AddSynonymActivity" />
         <activity android:name=".activities.EditWordActivity"></activity>
     </application>
 

@@ -25,8 +25,9 @@ import com.example.softspec.minidictionary.views.WordAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
-public class WordActivity extends AppCompatActivity {
+public class WordActivity extends AppCompatActivity{
 
     private Button backButton;
     private Button addSynButton;
@@ -47,16 +48,19 @@ public class WordActivity extends AppCompatActivity {
     }
 
     private void initComponents() {
-//        Log.e("TITLE", thisTitle);
         if(isFirstime) {
             word = (Word) getIntent().getSerializableExtra("word");
             thisTitle = word.getTitle();
+            Log.e("TITLE : ", thisTitle);
             isFirstime = false;
         }
         else {
             word = Storage.getInstance().getWordByTitle(thisTitle);
         }
         listSyn = new ArrayList<String>();
+        for(int i=0 ; i<word.getSynonym().size() ; i++) {
+            listSyn.add(word.getSynonym().get(i).getTitle());
+        }
         synonymAdapter  = new SynonymAdapter(this, R.layout.synonym_cell,listSyn);
         synonymListView = (ListView)findViewById(R.id.list_view_synonym);
         synonymListView.setAdapter(synonymAdapter);
@@ -83,7 +87,9 @@ public class WordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WordActivity.this, AddSynonymActivity.class);
+                intent.putExtra("word", word);
                 startActivity(intent);
+                finish();
             }
         });
     }

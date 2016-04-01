@@ -45,8 +45,6 @@ public class EditWordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 saveEditedWord();
                 Toast.makeText(EditWordActivity.this, "Editing Successful", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(EditWordActivity.this, WordActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
