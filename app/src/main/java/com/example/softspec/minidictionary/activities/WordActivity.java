@@ -67,8 +67,9 @@ public class WordActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(WordActivity.this, WordActivity.class);
-                intent.putExtra("word", listSyn.get(position));
+                intent.putExtra("word", Storage.getInstance().getWordByTitle(listSyn.get(position)));
                 startActivity(intent);
+                finish();
             }
         });
         title = (TextView)findViewById(R.id.tv_title);

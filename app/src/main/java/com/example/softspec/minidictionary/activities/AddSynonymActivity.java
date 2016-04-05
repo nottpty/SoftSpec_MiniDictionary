@@ -84,6 +84,7 @@ public class AddSynonymActivity extends AppCompatActivity {
     private void saveNewSynonym(String synonym) {
         Word synWord = Storage.getInstance().getWordByTitle(synonym);
         Storage.getInstance().addSynonym(this, word, synWord);
+        Storage.getInstance().addSynonym(this, synWord, word);
     }
 
     private boolean isSpecial(String word) {
