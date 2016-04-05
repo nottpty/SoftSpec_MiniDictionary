@@ -84,10 +84,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void onStart(){
-        Log.e("COMEBACK","eiei");
         super.onStart();
         if(isFirstime) {
-            Log.e("EIEIEISUNG","EIEIEISUGG");
             getWordsFromStorage();
             isFirstime = false;
         }
@@ -104,15 +102,27 @@ public class MainActivity extends AppCompatActivity {
         }
         for(int i = 0; i<size; i++) {
             String title = sp.getString("title_" + i, "");
-            /*
-            Check word have syn or not
-            then get size
-            and get array mang ma (split gor dai)
-             */
-            for(int j=0 )
-                /*
-                won add sai word jon mod
-                 */
+
+            Word word = Storage.getInstance().getWordByTitle(title);
+            String listSyn = sp.getString("synonym_" + i, "");
+            int sizeSyn = 0;
+            if(!(listSyn.equals(""))) {
+                for(int j=0; j<listSyn.length() ; j++) {
+                    if(listSyn.charAt(j) == ',')
+                        sizeSyn++;
+                }
+                sizeSyn++;
+            }
+            if(sizeSyn != 0) {
+                String[] arrSyn = new String[sizeSyn];
+                arrSyn = listSyn.split(",");
+                for(int j=0 ; j<sizeSyn ; j++) {
+                    String synonym = arrSyn[j];
+                    Word syn = Storage.getInstance().getWordByTitle(synonym);
+                    Storage.getInstance().addSynonym(this, word, syn);
+                }
+            }
+
             /**
              * If tong nee sed law
              * tum link pai another word duay na ja

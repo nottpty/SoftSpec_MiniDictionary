@@ -33,7 +33,6 @@ public class NewWordActivity extends AppCompatActivity {
     private void initComponents() {
         word = (TextView) findViewById(R.id.edtxt_title);
         meaning  = (TextView) findViewById(R.id.edtxt_meaning);
-        // TODO: save the new word into storage (if user clicks "SAVE").
         saveButton = (Button) findViewById(R.id.btn_save);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +57,6 @@ public class NewWordActivity extends AppCompatActivity {
 
             }
         });
-        // TODO: back to main activity (if user clicks "CANCEL").
         cancelButton = (Button) findViewById(R.id.btn_cancel);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override

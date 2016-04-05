@@ -51,7 +51,6 @@ public class WordActivity extends AppCompatActivity{
         if(isFirstime) {
             word = (Word) getIntent().getSerializableExtra("word");
             thisTitle = word.getTitle();
-            Log.e("TITLE : ", thisTitle);
             isFirstime = false;
         }
         else {
