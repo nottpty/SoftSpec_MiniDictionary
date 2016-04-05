@@ -24,84 +24,67 @@
         android:textColor="#ffffff"
         android:autoText="false" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Synonym"
-        android:id="@+id/btn_addSynonym"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/btn_back"
-        android:layout_toStartOf="@+id/btn_back" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:id="@+id/btn_back"
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/linearLayout"
-        android:layout_alignStart="@+id/linearLayout" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Meaning"
+        android:id="@+id/tv_meaning"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/tv_title"
+        android:layout_centerHorizontal="true" />
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/edtxt_meaning"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout">
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/linearLayout2">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Synonym"
+            android:id="@+id/btn_addSynonym"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/btn_back"
+            android:layout_toStartOf="@+id/btn_back" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:id="@+id/btn_back"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
     </LinearLayout>
 
-    <FrameLayout
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="115dp"
+        android:id="@+id/list_view_synonym"
+        android:transitionGroup="false"
+        android:clickable="false"
+        android:background="#3d3d3d"
+        android:choiceMode="none"
 
-    </FrameLayout>
+        android:layout_gravity="bottom"
+        android:layout_below="@+id/tv_meaning"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/linearLayout2" />
 
-    <FrameLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/tv_title"
-        android:layout_above="@+id/btn_back">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="163dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Meaning"
-            android:id="@+id/tv_meaning"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:textColor="#ffffff"
-            android:layout_gravity="left|top" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Synonym"
-            android:id="@+id/tv_synonym"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:textColor="#ffffff"
-            android:autoText="false"
-            android:layout_gravity="center" />
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="169dp"
-            android:id="@+id/list_view_synonym"
-            android:transitionGroup="false"
-            android:clickable="false"
-            android:background="#3d3d3d"
-            android:layout_alignParentEnd="true"
-            android:choiceMode="none"
-
-            android:layout_alignParentStart="true"
-            android:layout_gravity="bottom"/>
-
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Synonym"
+        android:id="@+id/tv_synonym"
+        android:textColor="#ffffff"
+        android:layout_gravity="center_vertical"
+        android:layout_alignBottom="@+id/tv_meaning"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
