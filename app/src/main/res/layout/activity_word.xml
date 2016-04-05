@@ -24,15 +24,27 @@
         android:textColor="#ffffff"
         android:autoText="false" />
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Meaning"
-        android:id="@+id/tv_meaning"
-        android:textColor="#ffffff"
-        android:layout_below="@+id/tv_title"
-        android:layout_centerHorizontal="true" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_synonym"
+        android:layout_above="@+id/linearLayout2"
+        android:background="#fd8607"
+        android:padding="5dp">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_view_synonym"
+            android:transitionGroup="false"
+            android:clickable="false"
+            android:background="#616161"
+            android:choiceMode="none"
+
+            android:layout_gravity="bottom"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -62,20 +74,6 @@
             android:layout_centerHorizontal="true" />
     </LinearLayout>
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="115dp"
-        android:id="@+id/list_view_synonym"
-        android:transitionGroup="false"
-        android:clickable="false"
-        android:background="#3d3d3d"
-        android:choiceMode="none"
-
-        android:layout_gravity="bottom"
-        android:layout_below="@+id/tv_meaning"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/linearLayout2" />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,7 +82,29 @@
         android:id="@+id/tv_synonym"
         android:textColor="#ffffff"
         android:layout_gravity="center_vertical"
-        android:layout_alignBottom="@+id/tv_meaning"
-        android:layout_alignParentStart="true" />
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:background="#fd8505"
+        android:layout_above="@+id/tv_synonym">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Meaning"
+            android:id="@+id/tv_meaning"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/tv_title"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@+id/tv_synonym"
+            android:background="#757575" />
+    </RelativeLayout>
 
 </RelativeLayout>
