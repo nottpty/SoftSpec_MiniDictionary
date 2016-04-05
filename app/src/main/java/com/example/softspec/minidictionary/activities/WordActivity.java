@@ -23,6 +23,7 @@ import com.example.softspec.minidictionary.views.SynonymAdapter;
 import com.example.softspec.minidictionary.views.WordAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -72,6 +73,42 @@ public class WordActivity extends AppCompatActivity{
                 finish();
             }
         });
+
+        synonymListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                Log.e("KUY","EIEI");
+                AlertDialog.Builder builder = new AlertDialog.Builder(WordActivity.this);
+
+                builder.setTitle("Confirm Delete");
+                builder.setMessage("Are you sure?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        Word synWord = Storage.getInstance().getWordByTitle(listSyn.get(position));
+                        Storage.getInstance().removeSynonym( WordActivity.this, word, synWord);
+                        Storage.getInstance().removeSynonym( WordActivity.this, synWord, word);
+                        Toast.makeText(WordActivity.this, "Deleting Successful", Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing
+                        finish();
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+                return true;
+            }
+        });
         title = (TextView)findViewById(R.id.tv_title);
         meaning = (TextView)findViewById(R.id.tv_meaning);
         synonymListView = (ListView)findViewById(R.id.list_view_synonym);
@@ -99,7 +136,7 @@ public class WordActivity extends AppCompatActivity{
         title.setText(word.getTitle());
         meaning.setText(word.getMeaning());
 
-
+        refreshWords();
     }
 
     @Override
@@ -156,4 +193,14 @@ public class WordActivity extends AppCompatActivity{
         inflater.inflate(R.menu.action_delete, menu);
         return true;
     }
+
+    private void refreshWords(){
+        listSyn.clear();
+        for(Word curWord: Storage.getInstance().getWordByTitle(word.getTitle()).getSynonym()){
+            listSyn.add(curWord.getTitle());
+        }
+        Collections.sort(listSyn);
+        synonymAdapter.notifyDataSetChanged();
+    }
+
 }

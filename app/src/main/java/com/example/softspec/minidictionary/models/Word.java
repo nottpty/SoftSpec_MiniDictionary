@@ -40,6 +40,10 @@ public class Word implements Serializable {
         synonym.add(word);
     }
 
+    public void removeSynonym(Word word) {
+        synonym.remove(word);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

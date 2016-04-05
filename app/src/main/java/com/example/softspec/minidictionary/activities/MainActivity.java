@@ -64,14 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//        addButton = (Button) findViewById(R.id.btn_add);
-//        addButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, NewWordActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     private void refreshWords(){
@@ -122,12 +114,6 @@ public class MainActivity extends AppCompatActivity {
                     Storage.getInstance().addSynonym(this, word, syn);
                 }
             }
-
-            /**
-             * If tong nee sed law
-             * tum link pai another word duay na ja
-             * EIEI
-             */
         }
     }
 

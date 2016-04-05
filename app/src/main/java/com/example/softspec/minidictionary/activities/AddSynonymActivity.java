@@ -40,11 +40,37 @@ public class AddSynonymActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveNewSynonym(synonym.getText().toString());
-                Toast.makeText(AddSynonymActivity.this, "Adding Successful", Toast.LENGTH_LONG).show();
-//                Intent intent = new Intent(AddSynonymActivity.this, MainActivity.class);
-//                startActivity(intent);
-                finish();
+                if( Storage.getInstance().getWordByTitle(synonym.getText().toString()) == null) {
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(AddSynonymActivity.this);
+                    dlgAlert.setMessage("Word does not exist.");
+                    dlgAlert.setTitle("Error");
+                    dlgAlert.setPositiveButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+                }
+                else if(word.getSynonym().contains(Storage.getInstance().getWordByTitle(synonym.getText().toString()))) {
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(AddSynonymActivity.this);
+                    dlgAlert.setMessage("This word already added.");
+                    dlgAlert.setTitle("Error");
+                    dlgAlert.setPositiveButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+                }
+                else {
+                    saveNewSynonym(synonym.getText().toString());
+                    Toast.makeText(AddSynonymActivity.this, "Adding Successful", Toast.LENGTH_LONG).show();
+                    finish();
+                }
             }
         });
         cancelButton = (Button) findViewById(R.id.btn_cancel_synonym);

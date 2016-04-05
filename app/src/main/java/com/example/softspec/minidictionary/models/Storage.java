@@ -56,6 +56,12 @@ public class Storage extends Observable {
         saveStorage(context);
     }
 
+    public void removeSynonym(Context context, Word word, Word synonym ) {
+        savedWords.get(savedWords.indexOf(word)).removeSynonym(synonym);
+        editor = context.getSharedPreferences(DB, Context.MODE_PRIVATE).edit();
+        saveStorage(context);
+    }
+
     public List<Word> loadWords(Context context) {
         return savedWords;
     }
